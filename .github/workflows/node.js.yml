@@ -15,7 +15,7 @@ jobs:
         node_version: ['12']
         os: [windows-latest]
     steps:
-      - run: cd ./client && npm run build
+      - run: cd client && npm run build
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v1
         with:
@@ -29,7 +29,7 @@ jobs:
         node_version: ['12']
         os: [windows-latest]
     steps:
-      - run: cd ./service && npm run build
+      - run: cd service && npm run build
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v1
         with:
