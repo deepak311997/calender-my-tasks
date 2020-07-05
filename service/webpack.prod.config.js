@@ -41,7 +41,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
-        { from: './src/config.json', to: '../dist/service' },
+        { from: './src/config.json', to: '' },
       ],
     })
   ]

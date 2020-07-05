@@ -26,7 +26,13 @@ const useStyles = makeStyles({
     },
 })
 
-const getDefaultState = () => ({ title: '', date: '', description: '' });
+const getFormattedDate = (date = new Date()) => {
+    const year = date.getFullYear(), month = date.getMonth(), day = date.getDate();
+
+    return `${year}-${month > 9 ? month : `0${month}`}-${day > 9 ? day : `0${day}`}`;
+}
+
+const getDefaultState = () => ({ title: '', date: getFormattedDate(), description: '' });
 
 export default function EventDialog({ isOpen, toggleDialog, event: eventDetails }) {
     const classes = useStyles();
