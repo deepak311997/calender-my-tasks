@@ -1,4 +1,4 @@
-const MongoClient = require('mongoDB').MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 
 function createConnection() {
   const uri = "mongodb+srv://deepak:taskmanager@calender-my-tasks.kucu5.mongodb.net/CalenderMyTasks?retryWrites=true&w=majority";
