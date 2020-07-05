@@ -9,14 +9,17 @@ on:
 jobs:
   job_1:
     runs-on: ${{ matrix.os }}
+    
     name: Build Front end for calender my tasks
     strategy:
       matrix:
         node_version: ['12']
         os: [windows-latest]
     steps:
-      - run: cd client && npm run build
-      - name: Upload math result for job 1
+      - run: |
+          cd client
+          npm run build
+      - name: Upload fe build for job 2
         uses: actions/upload-artifact@v1
         with:
           name: build
@@ -29,8 +32,10 @@ jobs:
         node_version: ['12']
         os: [windows-latest]
     steps:
-      - run: cd service && npm run build
-      - name: Upload math result for job 1
+      - run: |
+          cd service
+          npm run build
+      - name: Upload be build for job 3
         uses: actions/upload-artifact@v1
         with:
           name: build
