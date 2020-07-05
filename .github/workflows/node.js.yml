@@ -7,20 +7,38 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  job_1:
     runs-on: ${{ matrix.os }}
+    name: Build Front end for calender my tasks
     strategy:
       matrix:
         node_version: ['12']
         os: [windows-latest]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build
+      - run: cd ./client && npm run build
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: ../dist
+  job_2:
+    runs-on: ${{ matrix.os }}
+    name: Build Backend for calender my tasks
+    strategy:
+      matrix:
+        node_version: ['12']
+        os: [windows-latest]
+    steps:
+      - run: cd ./service && npm run build
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: ../dist
+  job_3:
+    runs-on: ${{ matrix.os }}
+    name: Integrate frontend and backend
+    steps:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
