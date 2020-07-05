@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
+import CodeIcon from '@material-ui/icons/Code';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import EventDialog from '../event-dialog/event-dialog-component';
@@ -35,15 +36,26 @@ export default function FilterComponent() {
             <div className='header-title'>
                 Event Calender
             </div>
+            <Tooltip arrow={true} title='Add a task'>
+                <Fab
+                    size='small'
+                    aria-label='previous'
+                    className={classes.fabButton}
+                    onClick={toggleEventDialog}
+                >
+                    <AddIcon />
+                </Fab>
+            </Tooltip>
             <div className='header-actions'>
-                <Tooltip arrow={true} title='Add a task'>
+                <Tooltip arrow={true} title='View source code'>
                     <Fab
                         size='small'
-                        aria-label='previous'
+                        aria-label='viewSourceCode'
                         className={classes.fabButton}
-                        onClick={toggleEventDialog}
+                        href='https://github.com/deepak311997/calender-my-tasks'
+                        target='_blank'
                     >
-                        <AddIcon />
+                        <CodeIcon />
                     </Fab>
                 </Tooltip>
             </div>
