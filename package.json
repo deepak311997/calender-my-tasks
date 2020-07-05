@@ -9,6 +9,9 @@
     "build:service": "webpack -p --config ./service/webpack.prod.config.js",
     "build": "npm run build:client && npm run build:service"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/deepak311997/calender-my-tasks.git"
