@@ -1,3 +1,6 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
 name: Node.js CI
 
 on:
@@ -7,45 +10,22 @@ on:
     branches: [ master ]
 
 jobs:
-  job_1:
+  build:
     runs-on: ${{ matrix.os }}
-    
-    name: Build Front end for calender my tasks
     strategy:
       matrix:
         node_version: ['12']
         os: [windows-latest]
     steps:
-      - run: |
-          cd ../client
-          npm run build
-      - name: Upload fe build for job 2
-        uses: actions/upload-artifact@v1
-        with:
-          name: build
-          path: ../dist
-  job_2:
-    runs-on: ${{ matrix.os }}
-    name: Build Backend for calender my tasks
-    strategy:
-      matrix:
-        node_version: ['12']
-        os: [windows-latest]
-    steps:
-      - run: |
-          cd ../service
-          npm run build
-      - name: Upload be build for job 3
-        uses: actions/upload-artifact@v1
-        with:
-          name: build
-          path: ../dist
-  job_3:
-    runs-on: ${{ matrix.os }}
-    name: Integrate frontend and backend
-    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: tasks-calender
+        name: excel-splitter
         path: ./build
