@@ -1,0 +1,37 @@
+@import '../assets/stylesheets/variables.scss';
+
+@import "./header/header.scss";
+@import "./calender/calender.scss";
+@import "./sidebar/sidebar.scss";
+@import "./event-dialog/event-dialog.scss";
+
+.app {
+    &-container {
+        display: flex;
+    }
+
+    &-header {
+        height: 60px;
+        z-index: 1;
+        box-shadow: 0px 2px 6px 4px rgba(0,0,0,0.2);
+    }
+
+    &-calender {
+        background-color: #E2E2E2;
+        height: calc(100vh - 60px);
+        padding: 50px;
+    }
+}
+
+.hide-content {
+    display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: monospace, cursive, Courier;
+}

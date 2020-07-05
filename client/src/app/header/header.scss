@@ -1,0 +1,14 @@
+.header {
+    &-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 20px;
+    }
+
+    &-title {
+        color: $color-primary;
+        font-family: monospace;
+        font-size: 25px;
+    }
+}

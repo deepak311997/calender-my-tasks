@@ -1,0 +1,13 @@
+.event-dialog {
+    &-content {
+        &_field {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        &_textfield {
+            width: 100%;
+        }
+    }
+}
