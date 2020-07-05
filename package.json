@@ -10,7 +10,7 @@
     "build": "npm run build:client && npm run build:service"
   },
   "engines": {
-    "node": "12.x"
+    "node": "12.16.x"
   },
   "repository": {
     "type": "git",
