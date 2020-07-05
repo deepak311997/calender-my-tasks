@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
@@ -35,14 +36,16 @@ export default function FilterComponent() {
                 Event Calender
             </div>
             <div className='header-actions'>
-                <Fab
-                    size='small'
-                    aria-label='previous'
-                    className={classes.fabButton}
-                    onClick={toggleEventDialog}
-                >
-                    <AddIcon />
-                </Fab>
+                <Tooltip arrow={true} title='Add a task'>
+                    <Fab
+                        size='small'
+                        aria-label='previous'
+                        className={classes.fabButton}
+                        onClick={toggleEventDialog}
+                    >
+                        <AddIcon />
+                    </Fab>
+                </Tooltip>
             </div>
             <EventDialog
                 isOpen={isAddEventDialog}

@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -60,6 +59,11 @@ module.exports = {
   devServer: {
     port: 5000,
     contentBase: './dist',
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:9091/',
+      },
+    }
   },
   plugins: [
     // /* Delete Distribution before building it */
@@ -67,9 +71,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),
-    new CopyWebpackPlugin([
-      { from: 'src/assets/img', to: './img' },
-    ]),
     new webpack.NoEmitOnErrorsPlugin(),
     // Code splitting
     new MiniCssExtractPlugin('bundle.[hash].css'),

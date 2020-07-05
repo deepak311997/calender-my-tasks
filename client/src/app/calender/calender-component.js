@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Fab, Grid, MenuItem, FormControl, Select } from '@material-ui/core';
+import { Fab, Grid, MenuItem, Select, Tooltip } from '@material-ui/core';
 import PreviousIcon from '@material-ui/icons/ChevronLeft';
 import NextIcon from '@material-ui/icons/ChevronRight';
 
 import Day from './calender-day-component';
 import EventDialog from '../event-dialog/event-dialog-component';
+import { EventServiceContext } from '../event-service/event-service-context';
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -34,6 +35,7 @@ const styles = () => ({
 });
 
 class CalenderComponent extends PureComponent {
+    static contextType = EventServiceContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -44,6 +46,8 @@ class CalenderComponent extends PureComponent {
         }
     }
 
+    getFormattedDate = (year, month, day) => `${year}-${month > 9 ? month : `0${month}`}-${day > 9 ? day : `0${day}`}`;
+
     getCurrentDate = () => (new Date()).getDate();
 
     getCurrentMonth = () => (new Date()).getMonth();
@@ -53,6 +57,18 @@ class CalenderComponent extends PureComponent {
     getMonthFirstDay = (month, year) => (new Date(year, month)).getDay();
 
     getDaysInMonth = (month, year) => 32 - (new Date(year, month, 32)).getDate();
+
+    getDayEvents = date => {
+        const events = [];
+
+        for (event in this.context.events) {
+            if (date === this.context.events[event].date) {
+                events.push(this.context.events[event]);
+            }
+        }
+
+        return events;
+    }
 
     onEventClick = (event, selectedEvent = {}) => {
         event.stopPropagation();
@@ -76,6 +92,8 @@ class CalenderComponent extends PureComponent {
                 } else if (currentDay > this.getDaysInMonth(selectedMonth, selectedYear)) {
                     break;
                 } else {
+                    const formattedDate = this.getFormattedDate(selectedYear, selectedMonth + 1, currentDay);
+
                     daysInweek.push(
                         <Grid
                             key={`${row}-${col}`}
@@ -85,30 +103,11 @@ class CalenderComponent extends PureComponent {
                                     currentDay === this.getCurrentDate() && selectedYear === this.getCurrentYear()
                                     && selectedMonth === this.getCurrentMonth()
                             })}
-                            onClick={this.onEventClick}
+                            onClick={(evt) => this.onEventClick(evt, { date: formattedDate })}
                         >
                             <Day
                                 day={currentDay}
-                                events={[
-                                    {
-                                        id: 1,
-                                        title: 'Deepak Birthdayyyyyyyyyyyyyy',
-                                        description: 'Its your birthday',
-                                        date: '2020-05-07'
-                                    },
-                                    {
-                                        id: 2,
-                                        title: 'Manish Birthday',
-                                        description: 'Gift manish chocolates',
-                                        date: '2020-05-07'
-                                    },
-                                    {
-                                        id: 3,
-                                        title: 'Achu Birthday',
-                                        description: 'Gift achu dog',
-                                        date: '2020-05-07'
-                                    },
-                                ]}
+                                events={this.getDayEvents(formattedDate)}
                                 onClick={this.onEventClick}
                             />
                         </Grid>
@@ -173,14 +172,16 @@ class CalenderComponent extends PureComponent {
         return (
             <div className='calender-container'>
                 <Grid container={true} alignItems='center' justify='center'>
-                    <Fab
-                        size="small"
-                        aria-label="previous"
-                        className={classes.fabButton}
-                        onClick={this.onPreviousMonth}
-                    >
-                        <PreviousIcon />
-                    </Fab>
+                    <Tooltip arrow={true} title='Jump to previous month'>
+                        <Fab
+                            size="small"
+                            aria-label="previous"
+                            className={classes.fabButton}
+                            onClick={this.onPreviousMonth}
+                        >
+                            <PreviousIcon />
+                        </Fab>
+                    </Tooltip>
                     <Select
                         label="Month"
                         value={selectedMonth}
@@ -199,14 +200,16 @@ class CalenderComponent extends PureComponent {
                     >
                         {this.renderYearList()}
                     </Select>
-                    <Fab
-                        size="small"
-                        aria-label="next"
-                        className={classes.fabButton}
-                        onClick={this.onNextMonth}
-                    >
-                        <NextIcon />
-                    </Fab>
+                    <Tooltip arrow={true} title='Jump to next month'>
+                        <Fab
+                            size="small"
+                            aria-label="next"
+                            className={classes.fabButton}
+                            onClick={this.onNextMonth}
+                        >
+                            <NextIcon />
+                        </Fab>
+                    </Tooltip>
                 </Grid>
                 <Grid container={true} className='calender-header'>
                     {

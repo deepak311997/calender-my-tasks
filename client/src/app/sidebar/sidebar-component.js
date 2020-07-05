@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SidebarComponent() {
     const classes = useStyles();
-    const [isDrawerVisible, setDrawerVisibility] = useState(false);
+    const [isDrawerVisible, setDrawerVisibility] = useState(true);
 
     const toggleDrawer = () => setDrawerVisibility(state => !state);
 

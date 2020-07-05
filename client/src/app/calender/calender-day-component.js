@@ -10,8 +10,8 @@ export default function Day({ day, events, onClick }) {
                 {
                     events.map(event => (
                         <div
-                            key={event.id}
-                            id={event.id}
+                            key={event._id}
+                            id={event._id}
                             className='calender-content-day_events--event'
                             onClick={evt => onClick(evt, event)}
                         >

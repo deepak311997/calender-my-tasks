@@ -1,0 +1,12 @@
+.sidebar {
+    &-content {
+        margin: 20px 0;
+
+        &_title {
+            font-size: 20px;
+            color: $color-white;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    }
+}

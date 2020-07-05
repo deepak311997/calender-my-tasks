@@ -15,7 +15,7 @@ connectMdb().then((db) => {
   app.locals.db = db;
 
   app.listen(config.port, () => {
-    console.log(`Echo Git listening on port ${config.port}`);
+    console.log(`Calender my tasks backend listening on port ${config.port}`);
   });
 });
 

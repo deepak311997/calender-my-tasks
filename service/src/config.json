@@ -1,4 +1,3 @@
 {
-    "port": 9091,
-    "mongoDbUrl": "mongodb://localhost:27017/CalenderTasks"
+    "port": 9091
 }  

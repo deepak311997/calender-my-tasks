@@ -16,7 +16,7 @@ const update = (db, taskId, newTask) => new Promise((resolve, reject) => {
             if (err) {
                 reject({ data: {}, message: 'Failed to update the task' });
             } else {
-                resolve({ data: response.value, message: 'Task updated successfully' });
+                resolve({ data: { _id: taskId, ...newTask }, message: 'Task updated successfully' });
             }
     });
 });

@@ -39,9 +39,11 @@ module.exports = {
   plugins: [
     // /* Delete Distribution before building it */
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([
-      { from: './config.json', to: '' },
-    ]),
-  ],
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './src/config.json', to: '../dist/service' },
+      ],
+    })
+  ]
 };
 

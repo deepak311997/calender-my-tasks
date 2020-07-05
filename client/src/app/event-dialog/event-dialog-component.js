@@ -1,28 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { InputAdornment, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import { AccessTime as DateIcon, Subject as DescIcon }  from '@material-ui/icons';
+import { InputAdornment, Button, Fab, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { AccessTime as DateIcon, Subject as DescIcon, Delete as DeleteIcon }  from '@material-ui/icons';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+
+import { EventServiceContext } from '../event-service/event-service-context';
 
 const useStyles = makeStyles({
     dialogActionsRoot: {
         padding: 15,
     },
+    fabButton: {
+        height: 35,
+        width: 35,
+        minHeight: 25,
+        margin: 10,
+        color: '#FFFFFF',
+        backgroundColor: '#813588',
+        border: '2px solid #813588',
+        float: 'right',
+        '&:hover': {
+            backgroundColor: '#813588',
+        }
+    },
 })
 
-const getCurrentDate = (date) => {
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    return `${date.getFullYear()}-${month > 9 ? month : `0${month}`}-${day > 9 ? day : `0${day}`}`;
-}
-
-const getDefaultState = () => ({ title: '', date: getCurrentDate(new Date()), description: '' });
+const getDefaultState = () => ({ title: '', date: '', description: '' });
 
 export default function EventDialog({ isOpen, toggleDialog, event: eventDetails }) {
     const classes = useStyles();
     const [eventData, setEventData] = useState(getDefaultState());
+    const { addEvent, updateEvent, deleteEvent } = useContext(EventServiceContext);
+    const isUpdate = eventDetails.hasOwnProperty('_id');
 
     const handleChange = (event) => {
         event.persist();
@@ -30,11 +40,21 @@ export default function EventDialog({ isOpen, toggleDialog, event: eventDetails 
     };
 
     const onEventSave = () => {
-        console.log(eventData);
+        if (isUpdate) {
+            updateEvent(eventData);
+        } else {
+            addEvent(eventData);
+        }
+        toggleDialog();
     };
 
+    const onEventDelete = () => {
+        deleteEvent(eventData._id);
+        toggleDialog();
+    }
+
     useEffect(() => {
-        if (eventDetails.hasOwnProperty('id')) {
+        if (isUpdate) {
             setEventData(eventDetails);
         }
     }, [eventDetails]);
@@ -42,12 +62,29 @@ export default function EventDialog({ isOpen, toggleDialog, event: eventDetails 
     useEffect(() => {
         if (!isOpen) {
             setEventData(getDefaultState())
+        } else {
+            if (isUpdate) {
+                setEventData(eventDetails);
+            } else {
+                setEventData(state => ({ ...state, date: eventDetails.date }));
+            }
         }
     }, [isOpen])
 
     return (
         <Dialog open={isOpen} onClose={toggleDialog} fullWidth={true}>
-            <DialogTitle id='event-dialog-title'>Add Event</DialogTitle>
+            <DialogTitle id='event-dialog-title'>
+                {`${isUpdate ? 'Update' : 'Add'} Event`}
+                { isUpdate &&
+                    <Fab
+                        aria-label="delete"
+                        className={classes.fabButton}
+                        onClick={onEventDelete}
+                    >
+                        <DeleteIcon fontSize='small'/>
+                    </Fab>
+                }
+            </DialogTitle>
             <DialogContent>
                 <TextField
                     id='title'
