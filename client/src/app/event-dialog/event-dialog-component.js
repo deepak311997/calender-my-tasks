@@ -32,7 +32,7 @@ const getFormattedDate = (date = new Date()) => {
     return `${year}-${month > 9 ? month : `0${month}`}-${day > 9 ? day : `0${day}`}`;
 }
 
-const getDefaultState = () => ({ title: '', date: getFormattedDate(), description: '' });
+const getDefaultState = () => ({ title: '', date: '', description: '' });
 
 export default function EventDialog({ isOpen, toggleDialog, event: eventDetails }) {
     const classes = useStyles();
@@ -72,7 +72,7 @@ export default function EventDialog({ isOpen, toggleDialog, event: eventDetails 
             if (isUpdate) {
                 setEventData(eventDetails);
             } else {
-                setEventData(state => ({ ...state, date: eventDetails.date }));
+                setEventData(state => ({ ...state, date: eventDetails.date ? eventDetails.date : getFormattedDate() }));
             }
         }
     }, [isOpen])

@@ -8,7 +8,7 @@ console.info('loading webpack production environment - server');
 
 module.exports = {
   mode: 'production',
-  entry: './src/app.js',
+  entry: './service/src/app.js',
   target: 'node',
   node: {
     __dirname: false,
@@ -23,7 +23,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '../build/service'),
     publicPath: '/',
     filename: 'service.js',
     libraryTarget: 'umd',
@@ -41,7 +41,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
-        { from: './src/config.json', to: '' },
+        { from: './service/src/config.json', to: '' },
       ],
     })
   ]

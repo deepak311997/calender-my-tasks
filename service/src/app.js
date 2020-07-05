@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -14,7 +15,7 @@ connectMdb().then((db) => {
   app.use(bodyParser.json());
   app.use(cors());
   app.use('/api/', routes);
-  app.use(express.static(__dirname))
+  app.use(express.static(path.join(__dirname, '../../build/client')));
 
   app.locals.db = db;
 

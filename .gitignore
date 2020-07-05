@@ -1,7 +1,5 @@
 .vscode
 client/.vscode
-client/node_modules
-client/dist
+node_modules
+build
 service/.vscode
-service/node_modules
-service/dist

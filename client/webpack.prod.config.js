@@ -6,18 +6,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-console.info('loading webpack production environment');
+console.info('loading webpack production environment - client');
 
 module.exports = (env = {}) => {
   config.mode = 'production';
   config.devtool = 'nosources-source-map';
-  config.output.path = path.resolve(__dirname, 'dist');
-  config.output.publicPath='./';
   config.plugins = [
     // /* Delete Distribution before building it */
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: 'client/src/index.html',
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({

@@ -1,18 +1,18 @@
 const path = require('path');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
-  entry: './src/app.js',
+  entry: './service/src/app.js',
   target: 'node',
   node: {
     __dirname: false,
     __filename: false,
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '../build/service'),
     publicPath: '/',
     filename: 'service.js',
   },

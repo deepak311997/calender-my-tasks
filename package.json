@@ -1,11 +1,13 @@
 {
-  "name": "calender-my-tasks-client",
+  "name": "calender-my-tasks",
   "version": "1.0.0",
-  "description": "The front end for for calender-my-tasks.",
-  "main": "index.js",
+  "description": "Application to manage your tasks",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack -p --config webpack.prod.config.js"
+    "start:client": "webpack-dev-server --config ./client/webpack.config.js",
+    "build:client": "webpack -p --config ./client/webpack.prod.config.js",
+    "start:service": "nodemon ./service/src/app.js",
+    "build:service": "webpack -p --config ./service/webpack.prod.config.js",
+    "build": "npm run build:client && npm run build:service"
   },
   "repository": {
     "type": "git",
@@ -18,9 +20,13 @@
   },
   "homepage": "https://github.com/deepak311997/calender-my-tasks#readme",
   "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
-    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -28,6 +34,12 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "nodemon": "^2.0.4",
+    "terser-webpack-plugin": "^3.0.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
     "@babel/core": "^7.10.3",
     "@babel/runtime": "^7.10.3",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
@@ -38,8 +50,6 @@
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-transform-imports": "^2.0.0",
     "babel-polyfill": "^6.26.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
     "eslint-plugin-babel": "^5.3.1",
     "html-webpack-plugin": "^4.3.0",
@@ -48,8 +58,6 @@
     "resolve-url-loader": "^3.1.1",
     "sass-loader": "^8.0.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }
 }

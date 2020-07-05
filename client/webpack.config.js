@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   mode: 'development',
   entry: {
-    app: './src/index.js',
+    app: './client/src/index.js',
     vendor: [
       'axios',
       'babel-polyfill',
@@ -22,7 +22,7 @@ module.exports = {
     ignored: /node_modules/,
   },
   resolve: {
-    modules: ['node_modules', 'src'],
+    modules: ['node_modules', './client/src'],
   },
   module: {
     rules: [
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'dist/calender-my-tasks/client'),
+    path: path.join(__dirname, '../build/client'),
     filename: '[name].bundle.[hash].js',
     pathinfo: true,
     publicPath: '/',
@@ -67,9 +67,9 @@ module.exports = {
   },
   plugins: [
     // /* Delete Distribution before building it */
-    // new CleanWebpackPlugin('dist/calender-my-tasks/client'),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: './client/src/index.html',
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     // Code splitting
