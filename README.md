@@ -6,8 +6,15 @@ Problem statement:
 Solution for the statement:
     Designing a web application which can keep track of your events. It can add new events, modify existing events and deleting the events. It also provides the capability of searching for events based on title, description and date.
 
+Features Available:
+    - Add new event from the header
+    - Update the event by clicking on that event and modifying the details.
+    - You can delete the event on clicking on that event and an option in bottom right is available to delete the event.
+    - We see the list of upcoming events and also search and filter by its title
+
 Architecture:
     It is MERN stack web application. The mongodb is pointing to cloud ATLAS.
+    Javascript/React -> Express/NodeJs -> MongoDB
 
 Tradeoffs:
     - Not many trade-offs that i have made, but the one thing that i majorly avoided was to use a calender library itself which  actually would save alot of time but didn't make sense to have that extra dependency.

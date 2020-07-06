@@ -1,5 +1,8 @@
 .sidebar {
     &-content {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
         margin: 20px 0;
 
         &_title {
@@ -7,6 +10,43 @@
             color: $color-white;
             text-align: center;
             margin-bottom: 10px;
+        }
+
+        &-list {
+            width: 95%;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            margin: 10px 0 !important;
+            height: calc(100vh - 250px);
+            overflow: auto;
+            box-sizing: border-box;
+            
+            &_item {
+                display: flex;
+                align-items: unset !important;
+                width: 85% !important;
+                flex-flow: column;
+                padding: 5px 10px;
+                margin: 5px 0;
+                background-color: $color-white;
+                border-radius: 10px;
+                box-shadow: 2px 3px 8px 3px rgba(59, 59, 59, 0.5);
+
+                &--date {
+                    font-size: 13px;
+                    margin-bottom: 5px;
+                }
+
+                &--title {
+                    font-size: 15px;
+                    font-weight: 800;
+                }
+
+                &--desc {
+                    font-size: 12px;
+                }
+            }
         }
     }
 }
