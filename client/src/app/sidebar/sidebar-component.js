@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 
-import { Button, Drawer, List, ListItem, Fab } from '@material-ui/core';
+import { Drawer, Fab } from '@material-ui/core';
 import EventIcon from '@material-ui/icons/Event';
 import CloseIcon from '@material-ui/icons/ArrowBack';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -87,12 +86,4 @@ export default function SidebarComponent() {
             </Drawer>
         </>
     );
-}
-
-SidebarComponent.defaultProps = {
-
-};
-
-SidebarComponent.propTypes = {
-
 }

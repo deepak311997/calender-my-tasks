@@ -57,7 +57,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 5000,
+    port: 8000,
     contentBase: './dist',
     proxy: {
       '/api/**': {

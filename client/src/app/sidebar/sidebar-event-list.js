@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { List, ListItem, ListItemText } from '@material-ui/core/';
+import { List, ListItem } from '@material-ui/core/';
 
 export default function SidebarEventList({ events = [{ date: '2020-07-06', title: 'Happy Birthday', description: 'Its your birthday so lets go out treat is on me !!' }] }) {
     return (
@@ -17,4 +17,8 @@ export default function SidebarEventList({ events = [{ date: '2020-07-06', title
             }
         </List>
     );
+}
+
+SidebarEventList.propTypes = {
+    events: PropTypes.array.isRequired,
 }
